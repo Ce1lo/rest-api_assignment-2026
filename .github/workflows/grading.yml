@@ -25,13 +25,14 @@ jobs:
 
     steps:
       - name: Checkout student PR code (untrusted, for sandbox only)
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          path: submission
-          persist-credentials: false
-          allow-unsafe-pr-checkout: true
+        run: |
+          mkdir -p submission
+          cd submission
+          git init
+          git remote add origin https://github.com/${{ github.event.pull_request.head.repo.full_name }}.git
+          git fetch --depth 1 origin ${{ github.event.pull_request.head.sha }}
+          git checkout FETCH_HEAD
+
 
       - name: Build and run student submission in isolated container
         env:
