@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Bộ khung bài tập REST API Student – PATCH và DELETE",
-  "type": "commonjs",
+  "type": "module",
   "main": "server.js",
   "engines": {
     "node": ">=22"
